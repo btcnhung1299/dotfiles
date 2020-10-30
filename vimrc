@@ -2,9 +2,7 @@
 "  Basic settings
 " ----------------------------------------------------
 syntax on
-set expandtab
-set tabstop=4
-set shiftwidth=4
+set expandtab tabstop=4 shiftwidth=4 softtabstop=4
 set autoindent
 set number
 
@@ -18,10 +16,13 @@ call plug#begin('~/.vim/plugged')
 Plug 'junegunn/seoul256.vim'
 
 " NERDTree
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 
 " Alignment
 Plug 'junegunn/vim-easy-align'
+
+" YouCompleteMe
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 
 " Sample code snippets
 Plug 'SirVer/ultisnips'
