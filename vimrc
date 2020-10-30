@@ -4,16 +4,20 @@
 syntax on
 set expandtab tabstop=4 shiftwidth=4 softtabstop=4
 set autoindent
+set hlsearch
+set foldmethod=indent foldnestmax=1
 set number
 
+highlight Folded ctermbg=black
+colorscheme xcodedark
 
 " ----------------------------------------------------
 "  Plugins
 " ----------------------------------------------------
 call plug#begin('~/.vim/plugged')
 
-" Low-contrast color scheme
-Plug 'junegunn/seoul256.vim'
+" Xcode colorscheme
+Plug 'arzg/vim-colors-xcode'
 
 " NERDTree
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
