@@ -1,4 +1,6 @@
-" ===================== MANUAL OPTIONS =====================
+" ----------------------------------------------------
+"  Basic settings
+" ----------------------------------------------------
 syntax on
 set expandtab
 set tabstop=4
@@ -6,30 +8,32 @@ set shiftwidth=4
 set autoindent
 set number
 
-" ===================== VIM PLUG =====================
+
+" ----------------------------------------------------
+"  Plugins
+" ----------------------------------------------------
 call plug#begin('~/.vim/plugged')
 
-" Make sure you use single quotes
+" Low-contrast color scheme
 Plug 'junegunn/seoul256.vim'
+
+" NERDTree
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+
+" Alignment
 Plug 'junegunn/vim-easy-align'
 
-" Group dependencies, vim-snippets depends on ultisnips
-Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+" Sample code snippets
+Plug 'SirVer/ultisnips'
 
-" On-demand loading
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
-
-" Using git URL
-Plug 'https://github.com/junegunn/vim-github-dashboard.git'
-
-" Plugin options
-Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
-
-" Plugin outside ~/.vim/plugged with post-update hook
+" Code searching
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
 
-" Unmanaged plugin (manually installed and updated)
-Plug '~/my-prototype-plugin'
-
 call plug#end()
+
+
+" ----------------------------------------------------
+"  Key bindings
+" ----------------------------------------------------
+nmap <C-N> :NERDTreeToggle<CR>
+

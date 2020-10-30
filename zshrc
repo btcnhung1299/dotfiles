@@ -130,3 +130,5 @@ if [ -f '/home/btcnhung1299/Cinnamon/google-cloud-sdk/path.zsh.inc' ]; then . '/
 if [ -f '/home/btcnhung1299/Cinnamon/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/btcnhung1299/Cinnamon/google-cloud-sdk/completion.zsh.inc'; fi
 
 conda activate jasmine
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
