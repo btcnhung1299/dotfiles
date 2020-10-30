@@ -7,9 +7,7 @@ set autoindent
 set hlsearch
 set foldmethod=indent foldnestmax=1
 set number
-
-highlight Folded ctermbg=black
-colorscheme xcodedark
+set clipboard=unnamedplus
 
 " ----------------------------------------------------
 "  Plugins
@@ -41,4 +39,12 @@ call plug#end()
 "  Key bindings
 " ----------------------------------------------------
 nmap <C-N> :NERDTreeToggle<CR>
+
+
+" ----------------------------------------------------
+"  Custom theme
+" ----------------------------------------------------
+colorscheme xcodedark
+highlight Normal ctermbg=None
+highlight Folded ctermbg=None
 
