@@ -48,17 +48,18 @@ conda activate jasmine
 
 
 # ----------------------------------------------------
-# Google cloud sdk
+# Google Cloud SDK
 # ----------------------------------------------------
 if [ -f '$GCLOUD/path.zsh.inc' ]; then . '$GCLOUD/path.zsh.inc'; fi
 if [ -f '$GCLOUD/completion.zsh.inc' ]; then . '$GCLOUD/completion.zsh.inc'; fi
 
 
 # ----------------------------------------------------
-# Zplug for plugin management
+# Plugins
 # ----------------------------------------------------
 source ~/.zplug/init.zsh
 
+zplug "plugins/git", from:oh-my-zsh
 zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-syntax-highlighting"
 
