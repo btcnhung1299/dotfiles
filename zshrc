@@ -16,12 +16,16 @@ source $ZSH/oh-my-zsh.sh
 # Enable vi key bindings
 bindkey -v
 
-plugins=(git)
+# Keep 1000 lines of history and save to file
+HISTSIZE=1000
+SAVEHIST=1000
+HISTFILE=~/.zsh_history
 
-alias vim_config="vim $HOME/.vimrc"
-alias tmux_config="vim $HOME/.tmux.conf"
-alias zsh_config="vim $HOME/.zshrc"
-alias ohmyzsh="vim $HOME/.oh-my-zsh"
+
+alias vim_config="vim ~/.vimrc"
+alias tmux_config="vim ~/.tmux.conf"
+alias zsh_config="vim ~/.zshrc"
+alias ohmyzsh="vim ~/.oh-my-zsh"
 
 
 # ----------------------------------------------------
@@ -48,3 +52,21 @@ conda activate jasmine
 # ----------------------------------------------------
 if [ -f '$GCLOUD/path.zsh.inc' ]; then . '$GCLOUD/path.zsh.inc'; fi
 if [ -f '$GCLOUD/completion.zsh.inc' ]; then . '$GCLOUD/completion.zsh.inc'; fi
+
+
+# ----------------------------------------------------
+# Zplug for plugin management
+# ----------------------------------------------------
+source ~/.zplug/init.zsh
+
+zplug "zsh-users/zsh-autosuggestions"
+zplug "zsh-users/zsh-syntax-highlighting"
+
+if ! zplug check --verbose; then
+    printf "Install? [y/N]: "
+    if read -q; then
+        echo; zplug install
+    fi
+fi
+
+zplug load
