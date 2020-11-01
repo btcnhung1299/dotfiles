@@ -12,6 +12,7 @@ set clipboard=unnamedplus
 " ----------------------------------------------------
 "  Plugins
 " ----------------------------------------------------
+
 call plug#begin('~/.vim/plugged')
 
 " Xcode colorscheme

@@ -5,8 +5,10 @@ fi
 
 # Global paths
 export ZSH="$HOME/.oh-my-zsh"
+export VIM="$HOME/.vim"
 export CONDA="$HOME/miniconda3"
 export GCLOUD="$HOME/google-cloud-sdk"
+export ZPLUG="$HOME/.zplug"
 
 ZSH_THEME="powerlevel10k/powerlevel10k"
 source $ZSH/oh-my-zsh.sh
@@ -29,8 +31,27 @@ alias ohmyzsh="vim ~/.oh-my-zsh"
 
 
 # ----------------------------------------------------
+# Vim-plug
+# ----------------------------------------------------
+if [ ! -f "$VIM/autoload/plug.vim" ]; then
+    printf "vim-plug hasn't been installed. Installing..."
+    echo;
+    curl -sfLo "$VIM/autoload/plug.vim" \
+    --create-dirs "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+fi
+
+
+# ----------------------------------------------------
 # Miniconda setup
 # ----------------------------------------------------
+if [ ! -d $CONDA ]; then
+    printf "conda hasn't been installed. Installing..."
+    echo;
+    curl -so ./conda_installer.sh \
+    "https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh"
+    bash ./conda_installer.sh -b -p $CONDA && rm -rf ./conda_installer.sh
+fi
+    
 __conda_setup="$('$CONDA/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
@@ -46,18 +67,23 @@ unset __conda_setup
 # Activate `jasmine` as default environment
 conda activate jasmine
 
-
 # ----------------------------------------------------
 # Google Cloud SDK
 # ----------------------------------------------------
-if [ -f '$GCLOUD/path.zsh.inc' ]; then . '$GCLOUD/path.zsh.inc'; fi
-if [ -f '$GCLOUD/completion.zsh.inc' ]; then . '$GCLOUD/completion.zsh.inc'; fi
+if [ -f "$GCLOUD/path.zsh.inc" ]; then . "$GCLOUD/path.zsh.inc"; fi
+if [ -f "$GCLOUD/completion.zsh.inc" ]; then . "$GCLOUD/completion.zsh.inc"; fi
 
 
 # ----------------------------------------------------
 # Plugins
 # ----------------------------------------------------
-source ~/.zplug/init.zsh
+if [ ! -d $ZPLUG ]; then
+    printf "zplug hasn't been installed. Installing..."
+    echo;
+    git clone https://github.com/zplug/zplug $ZPLUG
+fi
+
+source "$ZPLUG/init.zsh"
 
 zplug "plugins/git", from:oh-my-zsh
 zplug "zsh-users/zsh-autosuggestions"
