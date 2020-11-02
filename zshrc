@@ -9,21 +9,16 @@ export ZPLUG="$HOME/.zplug"
 # oh-my-zsh 
 # ----------------------------------------------------
 if [ ! -d $ZSH ]; then
-    printf "oh-my-zsh hasn't been installed. Installing...\n"
+    echo "oh-my-zsh hasn't been installed. Installing ..."
     curl -so ohmyzsh_installer.sh \
         "https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh" 
     bash ohmyzsh_installer.sh
 fi
 
 if [ ! -d "$ZSH/custom/themes/powerlevel10k" ]; then
-    printf "Powerlevel10k hasn't been installed. Installing...\n"
+    echo "Powerlevel10k hasn't been installed. Installing ..."
     git clone -q --depth=1 "https://github.com/romkatv/powerlevel10k.git" \
         ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
-fi
-
-# Enable Powerlevel10k instant prompt
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-    source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
 ZSH_THEME="powerlevel10k/powerlevel10k"
@@ -47,23 +42,13 @@ alias ohmyzsh="vim ~/.oh-my-zsh"
 
 
 # ----------------------------------------------------
-# Vim-plug
-# ----------------------------------------------------
-if [ ! -f "$VIM/autoload/plug.vim" ]; then
-    printf "vim-plug hasn't been installed. Installing...\n"
-    curl -sfLo "$VIM/autoload/plug.vim" \
-        --create-dirs "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
-fi
-
-
-# ----------------------------------------------------
 # Miniconda setup
 # ----------------------------------------------------
 if [ ! -d $CONDA ]; then
-    printf "conda hasn't been installed. Installing...\n"
-    curl -so ./conda_installer.sh \
+    echo "conda hasn't been installed. Installing ..."
+    curl -so conda_installer.sh \
         "https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh"
-    bash ./conda_installer.sh -b -p $CONDA && rm -rf ./conda_installer.sh
+    bash conda_installer.sh -b -p $CONDA && rm -rf conda_installer.sh
 fi
     
 __conda_setup="$('$CONDA/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
@@ -80,6 +65,15 @@ unset __conda_setup
 
 # Activate `jasmine` as default environment
 conda activate jasmine
+if [ $? -eq 1 ]; then
+    echo 'y' | conda create -n jasmine && conda activate jasmine
+    echo "Created and activated jasmine."
+    echo "Installing gawk for zplug ..."
+    echo 'y' | conda install -c anaconda gawk
+else
+    echo "jasmine is ready to go <3"
+fi
+
 
 # ----------------------------------------------------
 # Google Cloud SDK
@@ -92,7 +86,7 @@ if [ -f "$GCLOUD/completion.zsh.inc" ]; then . "$GCLOUD/completion.zsh.inc"; fi
 # Plugins
 # ----------------------------------------------------
 if [ ! -d $ZPLUG ]; then
-    printf "zplug hasn't been installed. Installing...\n"
+    echo "zplug hasn't been installed. Installing ..."
     git clone -q "https://github.com/zplug/zplug" $ZPLUG
 fi
 
@@ -110,3 +104,17 @@ if ! zplug check --verbose; then
 fi
 
 zplug load
+
+# ----------------------------------------------------
+# Vim-plug
+# ----------------------------------------------------
+if [ ! -f "$VIM/autoload/plug.vim" ]; then
+    echo "vim-plug hasn't been installed. Installing ..."
+    curl -sfLo "$VIM/autoload/plug.vim" \
+        --create-dirs "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+fi
+
+# Enable Powerlevel10k instant prompt
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+    source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
