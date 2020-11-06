@@ -1,3 +1,5 @@
+let g:python3_host_prog='$CONDA/envs/jasmine'
+
 " ----------------------------------------------------
 "  Basic settings
 " ----------------------------------------------------
@@ -8,6 +10,7 @@ set hlsearch
 set foldmethod=indent foldnestmax=1
 set number
 set clipboard=unnamedplus
+
 
 " ----------------------------------------------------
 "  Plugins
@@ -47,4 +50,3 @@ nmap <C-N> :NERDTreeToggle<CR>
 colorscheme xcodedark
 highlight Normal ctermbg=None
 highlight Folded ctermbg=None
-
