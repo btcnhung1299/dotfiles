@@ -15,6 +15,7 @@ set clipboard=unnamedplus
 " ----------------------------------------------------
 "  Plugins
 " ----------------------------------------------------
+
 call plug#begin('~/.vim/plugged')
 
 " Xcode colorscheme
@@ -27,7 +28,7 @@ Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'junegunn/vim-easy-align'
 
 " YouCompleteMe
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+" Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 
 " Sample code snippets
 Plug 'SirVer/ultisnips'
