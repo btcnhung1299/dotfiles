@@ -66,12 +66,10 @@ unset __conda_setup
 # Activate `jasmine` as default environment
 conda activate jasmine
 if [ $? -eq 1 ]; then
-    echo 'y' | conda create -n jasmine && conda activate jasmine
+    conda create -n jasmine -y && conda activate jasmine
     echo "Created and activated jasmine."
     echo "Installing gawk for zplug ..."
-    echo 'y' | conda install -c anaconda gawk
-else
-    echo "jasmine is ready to go <3"
+    conda install -y -c anaconda gawk
 fi
 
 
@@ -97,10 +95,7 @@ zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-syntax-highlighting"
 
 if ! zplug check --verbose; then
-    printf "Install? [y/N]: "
-    if read -q; then
-        echo; zplug install
-    fi
+    zplug install
 fi
 
 zplug load
