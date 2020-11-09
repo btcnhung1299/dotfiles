@@ -5,3 +5,4 @@ ln -s ~/dotfiles/zshrc           ~/.zshrc
 ln -s ~/dotfiles/tmux.conf       ~/.tmux.conf
 tmux kill-server
 zsh
+echo "exec zsh" >> ~/.bashrc
