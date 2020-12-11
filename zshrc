@@ -6,12 +6,12 @@ export GCLOUD="$HOME/google-cloud-sdk"
 export ZPLUG="$HOME/.zplug"
 
 # ----------------------------------------------------
-# oh-my-zsh 
+# oh-my-zsh
 # ----------------------------------------------------
 if [ ! -d $ZSH ]; then
     echo "oh-my-zsh hasn't been installed. Installing ..."
     curl -so ohmyzsh_installer.sh \
-        "https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh" 
+        "https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh"
     bash ohmyzsh_installer.sh
 fi
 

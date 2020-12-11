@@ -13,9 +13,10 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'junegunn/vim-easy-align'
-Plug 'Valloric/YouCompleteMe', { 'commit':'d98f896', 'do': './install.py' }
+Plug 'Valloric/YouCompleteMe', { 'commit': 'd98f896', 'do': './install.py' }
 Plug 'SirVer/ultisnips'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } 
+Plug 'junegunn/fzf.vim'
 
 call plug#end()
 
