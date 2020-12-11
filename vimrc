@@ -21,6 +21,8 @@ Plug 'junegunn/fzf.vim'
 call plug#end()
 
 nmap <C-N> :NERDTreeToggle<CR>
+nnoremap <silent> <C-f> :Files<CR>
+nnoremap <silent> <Leader>f :Rg<CR>
 
 colorscheme xcodedark
 let g:airline_theme='bubblegum'
