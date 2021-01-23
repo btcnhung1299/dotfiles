@@ -6,3 +6,4 @@ ln -s ~/dotfiles/tmux.conf       ~/.tmux.conf
 tmux kill-server
 zsh
 echo "exec zsh" >> ~/.bashrc
+cp -r ~/dotfiles/vim/*          ~/.vim

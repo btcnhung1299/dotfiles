@@ -4,7 +4,7 @@ export VIM="$HOME/.vim"
 export CONDA="$HOME/miniconda3"
 export GCLOUD="$HOME/google-cloud-sdk"
 export ZPLUG="$HOME/.zplug"
-export GPG_TTY=$(tty)`
+export GPG_TTY=$(tty)
 
 # ----------------------------------------------------
 # oh-my-zsh
