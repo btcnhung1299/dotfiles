@@ -4,7 +4,9 @@ set autoindent
 set hlsearch
 set foldmethod=indent foldnestmax=1
 set number
+set joinspaces
 set clipboard=unnamedplus
+set pastetoggle=<F2>
 
 call plug#begin('~/.vim/plugged')
 
@@ -22,6 +24,7 @@ call plug#end()
 
 nmap <C-N> :NERDTreeToggle<CR>
 nnoremap <silent> <C-f> :Files<CR>
+" ripgrep for string matchin
 nnoremap <silent> <Leader>f :Rg<CR>
 
 colorscheme xcodedark
