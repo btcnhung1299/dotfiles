@@ -1,5 +1,5 @@
 # Dotfiles
-This repo contains my configuration for:
-- vim/nvim
+This repository contains my configuration for:
+- vim
 - zsh
 - tmux
