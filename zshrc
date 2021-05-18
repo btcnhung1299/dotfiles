@@ -64,11 +64,11 @@ else
 fi
 unset __conda_setup
 
-# Activate `jasmine` as default environment
-conda activate jasmine
+# Activate `default-env` as default environment
+conda activate default-env
 if [ $? -eq 1 ]; then
-    conda create -n jasmine -y && conda activate jasmine
-    echo "Created and activated jasmine."
+    conda create -n default-env -y && conda activate default-env
+    echo "Created and activated `default-env`."
     echo "Installing gawk for zplug ..."
     conda install -y -c anaconda gawk
 fi
