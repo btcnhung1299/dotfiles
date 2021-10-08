@@ -1,31 +1,27 @@
-# Global paths
-export ZSH="$HOME/.oh-my-zsh"
-export VIM="$HOME/.vim"
-export CONDA="$HOME/miniconda3"
-export GCLOUD="$HOME/google-cloud-sdk"
-export ZPLUG="$HOME/.zplug"
+# Global variables
+export MNT_HOME=/mnt/ai_filestore/home/joanna
+export SHELL=`(which zsh)`
 export GPG_TTY=$(tty)
+cd $MNT_HOME
 
-# ----------------------------------------------------
-# oh-my-zsh
-# ----------------------------------------------------
-if [ ! -d $ZSH ]; then
-    echo "oh-my-zsh hasn't been installed. Installing ..."
-    curl -so ohmyzsh_installer.sh \
-        "https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh"
-    bash ohmyzsh_installer.sh
+# Shell variables
+ZSH=$HOME/.oh-my-zsh
+ZPLUG=$HOME/.zplug
+VIM=$HOME/.vim
+CONDA=$MNT_HOME/miniconda3
+
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+    source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-if [ ! -d "$ZSH/custom/themes/powerlevel10k" ]; then
-    echo "Powerlevel10k hasn't been installed. Installing ..."
-    git clone -q --depth=1 "https://github.com/romkatv/powerlevel10k.git" \
-        ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
-fi
-
+# Enable Powerlevel10k
 ZSH_THEME="powerlevel10k/powerlevel10k"
-source $ZSH/oh-my-zsh.sh
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -f $ZSH/oh-my-zsh.sh ] && source $ZSH/oh-my-zsh.sh
+[ -f $HOME/.p10k.zsh ] && source $HOME/.p10k.zsh
+[ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh
 
 # Enable vi key bindings
 bindkey -v
@@ -33,25 +29,19 @@ bindkey -v
 # Keep 1000 lines of history and save to file
 HISTSIZE=1000
 SAVEHIST=1000
-HISTFILE=~/.zsh_history
+HISTFILE=$HOME/.zsh_history
 
-
-alias vim_config="vim ~/.vimrc"
-alias tmux_config="vim ~/.tmux.conf"
-alias zsh_config="vim ~/.zshrc"
-alias ohmyzsh="vim ~/.oh-my-zsh"
-
-
-# ----------------------------------------------------
-# Miniconda setup
-# ----------------------------------------------------
-if [ ! -d $CONDA ]; then
-    echo "conda hasn't been installed. Installing ..."
-    curl -so conda_installer.sh \
-        "https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh"
-    bash conda_installer.sh -b -p $CONDA && rm -rf conda_installer.sh
+# Set up plug-ins via zplug
+[ -f $ZPLUG/init.zsh ] && source $ZPLUG/init.zsh
+zplug "plugins/git", from:oh-my-zsh
+zplug "zsh-users/zsh-autosuggestions"
+zplug "zsh-users/zsh-syntax-highlighting"
+if ! zplug check --verbose; then
+    zplug install
 fi
-    
+zplug load
+
+# Set up conda
 __conda_setup="$('$CONDA/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
@@ -64,7 +54,6 @@ else
 fi
 unset __conda_setup
 
-# Activate `default-env` as default environment
 conda activate default-env
 if [ $? -eq 1 ]; then
     conda create -n default-env -y && conda activate default-env
@@ -73,44 +62,5 @@ if [ $? -eq 1 ]; then
     conda install -y -c anaconda gawk
 fi
 
-
-# ----------------------------------------------------
-# Google Cloud SDK
-# ----------------------------------------------------
-if [ -f "$GCLOUD/path.zsh.inc" ]; then . "$GCLOUD/path.zsh.inc"; fi
-if [ -f "$GCLOUD/completion.zsh.inc" ]; then . "$GCLOUD/completion.zsh.inc"; fi
-
-
-# ----------------------------------------------------
-# Plugins
-# ----------------------------------------------------
-if [ ! -d $ZPLUG ]; then
-    echo "zplug hasn't been installed. Installing ..."
-    git clone -q "https://github.com/zplug/zplug" $ZPLUG
-fi
-
-source "$ZPLUG/init.zsh"
-
-zplug "plugins/git", from:oh-my-zsh
-zplug "zsh-users/zsh-autosuggestions"
-zplug "zsh-users/zsh-syntax-highlighting"
-
-if ! zplug check --verbose; then
-    zplug install
-fi
-
-zplug load
-
-# ----------------------------------------------------
-# Vim-plug
-# ----------------------------------------------------
-if [ ! -f "$VIM/autoload/plug.vim" ]; then
-    echo "vim-plug hasn't been installed. Installing ..."
-    curl -sfLo "$VIM/autoload/plug.vim" \
-        --create-dirs "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
-fi
-
-# Enable Powerlevel10k instant prompt
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-    source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
