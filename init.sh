@@ -1,7 +1,7 @@
 #!/bin/bash
 
 HOME=/home/joanna
-MNT_HOME=/mnt/ai_filestore/home/joanna
+MNT_HOME=$HOME/joanna
 DOT_DIR=$MNT_HOME/dotfiles
 
 # Set up oh-my-zsh as default zsh
@@ -13,7 +13,7 @@ if [ ! -d $HOME/.oh-my-zsh ]; then
 fi
 
 # Symbolic link system configuration files
-declare -a config_files=("vimrc" "zshrc" "tmux.conf")
+declare -a config_files=("vimrc" "tmux.conf" "zshrc" "p10k.zsh")
 for config_name in "${config_files[@]}"
 do
 	sys_path=$HOME/.${config_name}
@@ -58,10 +58,11 @@ if [ ! -f $HOME/.vim/autoload/plug.vim ]; then
 fi
 
 # Set zsh as default shell
-echo "[ -n \"ZSH_VERSION\" ] && exec zsh" >> ${HOME}/.profile
+zsh_command="[ -n \"ZSH_VERSION\" ] && exec zsh"
+grep -F -q "$zsh_command" "${HOME}/.profile" || echo $zsh_command >> ${HOME}/.profile
 
 # Set up conda
-# Temporarily change home directory, inactivated when finished
+# Temporarily change home directory, inactivated when script finished
 export HOME=$MNT_HOME
 if [ ! -d $HOME/miniconda3 ]; then
     echo "Installing conda..."

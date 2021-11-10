@@ -8,5 +8,5 @@ This repository contains my configuration for:
 ```console
 bash init.sh
 ```
-2. Copy lines in `temp.sh` and add to the beginning of .zshrc to see global variable `HOME` and `LOCAL_HOME` in zsh interactive shell
-3. Run `zsh` to custom shell and install plug-ins
+2. Re-login for changes to take effects
+3. As oh-my-zsh installed, re-run `init.sh` to link `zsh.rc` to the local zsh configuration 

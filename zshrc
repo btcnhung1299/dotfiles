@@ -1,5 +1,5 @@
 # Global variables
-export MNT_HOME=/mnt/ai_filestore/home/joanna
+export MNT_HOME=$HOME/joanna
 export SHELL=`(which zsh)`
 export GPG_TTY=$(tty)
 cd $MNT_HOME
@@ -64,3 +64,9 @@ fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# My "remove"
+[[ ! -d ~/.trash ]] && mkdir ~/.trash
+del() {
+    mv "$@" ~/.trash && echo "Successfully delete them"
+}
