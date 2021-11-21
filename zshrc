@@ -1,3 +1,8 @@
+# Locale settings
+export LANG="C.UTF-8"
+export LANGUAGE="C.UTF-8"
+export LC_ALL="C.UTF-8"
+
 # Global variables
 export MNT_HOME=$HOME/joanna
 export SHELL=`(which zsh)`
@@ -68,5 +73,5 @@ fi
 # My "remove"
 [[ ! -d ~/.trash ]] && mkdir ~/.trash
 del() {
-    mv "$@" ~/.trash && echo "Successfully delete them"
+    mv "$@" ~/.trash && echo "Successfully delete ^-^"
 }
